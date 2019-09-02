@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body class="container">
+
+<h1 th:text="${title}">Default Title</h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<ul>
+    <!-- ${ tells Thymeleaf to look in the Model for the value named categories -->
+    <!-- th:each means repeat the <li> tag for each element in the list -->
+    <!-- th:text="${category.getName()} getter accesses data/inserts text from the iterator object -->
+    <li th:each="category : ${categories}" th:text="${category.getName()}"></li>
+</ul>
+<a href="/category/add">Add Category</a>
+</body>
+</html>
