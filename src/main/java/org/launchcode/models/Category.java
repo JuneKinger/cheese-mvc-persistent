@@ -51,7 +51,8 @@ public class Category {
     public void setName(String name) {
         this.name = name;
     }
-
+    // used in cheeseController value = "remove" to get list of cheeses for a given category
+    // to remove them from data layer
     public List<Cheese> getCheeses() {
         return cheeses;
     }

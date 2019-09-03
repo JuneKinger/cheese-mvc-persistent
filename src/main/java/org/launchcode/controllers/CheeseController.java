@@ -43,6 +43,8 @@ public class CheeseController {
     public String displayAddCheeseForm(Model model) {
         model.addAttribute("title", "Add Cheese");
         model.addAttribute(new Cheese());
+        // need findAll() to display all the categories in the view in order
+        // for the user to select one
         model.addAttribute("categories", categoryDao.findAll());
         return "cheese/add";
     }
@@ -54,14 +56,19 @@ public class CheeseController {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Cheese");
+            model.addAttribute("categories", categoryDao.findAll());
             return "cheese/add";
         }
-        // we need to have the Category object corresponding to this ID, se we
-        // can set up the new cheese properly. Get it from the data layer:
+        // we need to have the Category object corresponding to this ID so we
+        // can set the new cheese fields properly to that category. This will fetch a
+        // single Category object with ID matching the CategoryId
+        // findOne() retrieves the entity by the given Id from the data layer
         Category cat = categoryDao.findOne(categoryId);
 
-        // this will fetch a single Category object with ID matching the CategoryId
-        // value selected. Then set it:
+        // So when data comes in from the view,
+        // newCheese has id = 0, name = "cheddar", description = "cheddar cheese",
+        // category = null.  Then use the category object to set newCheese with the
+        // proper category id and other details
         newCheese.setCategory(cat);
         cheeseDao.save(newCheese);
         return "redirect:";
@@ -85,16 +92,16 @@ public class CheeseController {
         return "redirect:";
     }
 
+    // comes here when "Categories" is selected from home screen
     @RequestMapping(value = "category", method = RequestMethod.GET)
     public String category(Model model, @RequestParam int id) {
 
-        // get the category id from the URL like /cheese/category/3 where
-        // 3 is the ID of the category (when category link is clicked)
-        // cat has the category Id as well the list of cheeses for that id
+        // get the category id from the URL eg. /cheese/category/3 where
+        // 3 is the ID of the category (when category list is clicked) and find
+        // the id in category data
         Category cat = categoryDao.findOne(id);
 
-        // retrieve all the cheeses for that category ID and place it into the
-        // array to pass into the view
+        // retrieve all the cheeses in the given category and pass them into the view
         List<Cheese> cheeses = cat.getCheeses();
         model.addAttribute("cheeses", cheeses);
         // displays Cheeses in Category: category name

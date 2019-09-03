@@ -22,7 +22,7 @@ public class Cheese {
     private String name;
 
     @NotNull
-    @Size(min=1, message = "Description must not be empty")
+    @Size(min=1, message = "description must not be empty")
     private String description;
 
     // many-to-one relationship established here - many cheeses for any one category
@@ -64,6 +64,8 @@ public class Cheese {
         return category;
     }
 
+    // used in CheeseController to set the new cheese with the category object (with id)
+    // before adding a new cheese to the database
     public void setCategory(Category category) {
         this.category = category;
     }
