@@ -93,15 +93,20 @@ public class CheeseController {
     }
 
     // comes here when "Categories" is selected from home screen
+    // get the category id from the URL eg. /cheese/category/3 where
+    // 3 is the ID of the category (when category list is clicked) and find
+    // the id in category data
     @RequestMapping(value = "category", method = RequestMethod.GET)
     public String category(Model model, @RequestParam int id) {
 
-        // get the category id from the URL eg. /cheese/category/3 where
-        // 3 is the ID of the category (when category list is clicked) and find
-        // the id in category data
+        // categoryDao has ALL records with properties of id, name, list of cheese objects
+        // findOne() finds by id a specific category object (equivalent to one record)
+        // from all the objects in categoryDao which now contains id, name, list of cheese
+        // objects and places it in cat object reference - cat now has one record of id, name,
+        // list of cheese objects
         Category cat = categoryDao.findOne(id);
 
-        // retrieve all the cheeses in the given category and pass them into the view
+        // retrieve all the cheeses out of cat (which holds one record) and stores them in cheeses
         List<Cheese> cheeses = cat.getCheeses();
         model.addAttribute("cheeses", cheeses);
         // displays Cheeses in Category: category name
