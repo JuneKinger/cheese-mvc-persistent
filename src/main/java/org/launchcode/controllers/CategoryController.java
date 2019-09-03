@@ -24,7 +24,7 @@ public class CategoryController {
     @Autowired
     private CategoryDao categoryDao;
 
-    // the index handler /category should retrieve the list of all categories
+    // The index handler /category should retrieve the list of all categories
     // - done via the categoryDao object - findAll() returns/retrieves an iterable
     // of all Category objects managed by categoryDao
 
