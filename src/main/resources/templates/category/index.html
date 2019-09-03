@@ -9,10 +9,10 @@
 <nav th:replace="fragments :: navigation"></nav>
 
 <ul>
-    <!-- ${ tells Thymeleaf to look in the Model for the value named categories -->
-    <!-- th:each means repeat the <li> tag for each element in the list -->
-    <!-- th:text="${category.getName()} getter accesses data/inserts text from the iterator object -->
-    <li th:each="category : ${categories}" th:text="${category.getName()}"></li>
+
+<li th:each="category : ${categories}">
+    <a th:href="'cheese/category?id=' + ${category.id}" th:text="${category.name}"></a>
+</li>
 </ul>
 <a href="/category/add">Add Category</a>
 </body>
