@@ -8,7 +8,7 @@
 
 <nav th:replace="fragments :: navigation"></nav>
 
-<p th:unless="${cheeses} and ${cheeses.size()}">no cheese :(</p>
+<p th:unless="${cheeses} and ${cheeses.size()}">no cheese</p>
 
 
 <table class="table">
@@ -16,10 +16,14 @@
     <tr>
         <th>Name</th>
         <th>Description</th>
-        <th>Type</th>
+        <th>Category</th>
 
     </tr>
 
+    <!-- th:text=... ${cheese} is an object and .name is the property
+    thymeleaf (TL) executes a getter on object cheese
+    "${cheese.category.name}" - TL gets category from cheese object and then
+    gets name from category -->
     <tr th:each="cheese : ${cheeses}">
         <td th:text="${cheese.name}"></td>
         <td th:text="${cheese.description}"></td>
@@ -28,6 +32,7 @@
     </tr>
 
 </table>
-
+<a href="/cheese/add">Add |</a>
+<a href="/cheese/remove">Remove</a>
 </body>
 </html>

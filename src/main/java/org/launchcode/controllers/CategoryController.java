@@ -15,21 +15,14 @@ import javax.validation.Valid;
 @RequestMapping("category")
 public class CategoryController {
 
-    // creates a field categoryDao of type CategoryDao
-    // This object will be what will interact with objects stored in the database
-    // Spring will creates a class that implements CategoryDao and put one of those
-    // objects in the categoryDao field when the application starts up
-    // Every controller class that you want to have access to the persistent collections
-    // defined within categoryDao needs this code to be added
+     // creates a field categoryDao of type CategoryDao object
     @Autowired
     private CategoryDao categoryDao;
 
     // The index handler /category should retrieve the list of all categories
-    // - done via the categoryDao object - findAll() returns/retrieves an iterable
-    // of all Category objects managed by categoryDao
-
     @RequestMapping(value = "")
     public String index(Model model) {
+
         model.addAttribute("categories", categoryDao.findAll());
         model.addAttribute("title", "Categories");
         return "category/index";
@@ -52,6 +45,8 @@ public class CategoryController {
             model.addAttribute("title", "Add Category");
             return "category/add";
         }
+        // save generates the id first, through the @generated annotation,
+        // before saving in the db
         categoryDao.save(category);
         return "redirect:";
     }

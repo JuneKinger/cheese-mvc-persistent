@@ -24,9 +24,6 @@ public class Category {
     // list will represent the list of all items in a given category
     // one-to-many relationship established with foreign key category_id
     @OneToMany
-    // Hibernate will use category_id column of the cheese table to
-    // determine which cheese belong to a given category and will populate
-    // this particular list for us based on these relationships
     @JoinColumn(name = "category_id")
     private List<Cheese> cheeses = new ArrayList<>();
 

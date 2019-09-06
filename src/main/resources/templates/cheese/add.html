@@ -6,6 +6,8 @@
 
 <nav th:replace="fragments :: navigation"></nav>
 
+<!-- inputs will be placed in th:object fields (the th:field should
+ correspond to property field in cheese.java -->
 <form method="post" style="max-width:600px;" th:object="${cheese}">
     <div class="form-group">
         <label th:for="name">Name</label>
